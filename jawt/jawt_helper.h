@@ -5,7 +5,7 @@
 
 class JawtHelper {
   JNIEnv *env;
-  jclass canvas;
+  jobject canvas;
 
 public:
   JAWT awt;
@@ -16,7 +16,7 @@ public:
 
   int error;
 
-  JawtHelper(JNIEnv *env, jclass canvas): env(env), canvas(canvas) {
+  JawtHelper(JNIEnv *env, jobject canvas): env(env), canvas(canvas) {
     error = init();
   }
 
