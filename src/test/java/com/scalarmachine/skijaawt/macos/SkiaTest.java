@@ -35,10 +35,14 @@ public class SkiaTest {
                     if (!canvas.isValid()) return;
                     canvas.nBeginRender();
 
+                    long texture = canvas.nGetMetalTexture();
+
+                    System.out.println(texture);
+
                     BackendRenderTarget renderTarget = BackendRenderTarget.makeMetal(
                         (int) 200,
                         (int) 200,
-                        0
+                        texture
                     );
 
                     // canvas.nRender();
