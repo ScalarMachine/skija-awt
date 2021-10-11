@@ -61,6 +61,10 @@ public class SkiaTest {
                     var canvas = surface.getCanvas();
                     canvas.clear(0);
 
+                    float dpi = 2.0f;
+
+                    canvas.scale(dpi, dpi);
+
                     fRotationAngle += 0.2f;
                     if (fRotationAngle > 360.0f) {
                         fRotationAngle -= 360.0f;
