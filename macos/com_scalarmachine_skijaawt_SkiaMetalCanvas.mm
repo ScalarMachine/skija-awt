@@ -1,4 +1,4 @@
-#import "com_scalarmachine_skijaawt_SkiaMetalCanvas.h";
+#import "com_scalarmachine_skijaawt_SkiaMetalCanvas.h"
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
