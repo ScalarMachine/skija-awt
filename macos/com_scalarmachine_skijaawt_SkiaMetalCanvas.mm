@@ -1,5 +1,5 @@
 #import "com_scalarmachine_skijaawt_SkiaMetalCanvas.h"
-#import "jawt_helper.h"
+#import "jawt/jawt_helper.h"
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
