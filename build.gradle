@@ -19,4 +19,5 @@ task runSkiaTest(type: JavaExec) {
     group = "Execution"
     classpath = sourceSets.test.runtimeClasspath
     main = "com.scalarmachine.skijaawt.SkiaTest"
+    jvmArgs = "-Djava.library.path=${project.projectDir}/out"
 }
