@@ -96,6 +96,26 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nResize
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nGetBackWidth
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetBackWidth
+  (JNIEnv *, jobject) {
+    return backWidth;
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nGetBackHeight
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetBackHeight
+  (JNIEnv *, jobject) {
+    return backHeight;
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nBeginRender
  * Signature: ()I
  */

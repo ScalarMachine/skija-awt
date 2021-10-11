@@ -44,8 +44,8 @@ public class SkiaTest {
                     panel.nBeginRender();
 
                     BackendRenderTarget renderTarget = BackendRenderTarget.makeMetal(
-                        (int) 200,
-                        (int) 200,
+                        (int) panel.nGetBackWidth(),
+                        (int) panel.nGetBackHeight(),
                         panel.nGetDrawableTexturePtr()
                     );
                     Surface surface = Surface.makeFromBackendRenderTarget(
@@ -71,7 +71,7 @@ public class SkiaTest {
                     Paint paint = new Paint();
                     paint.setStrokeWidth(3f);
                     paint.setColor(0xFFFFFFFF);
-                    canvas.drawLine(100, 100, 200, 200, paint);
+                    canvas.drawLine(10, 10, 100, 100, paint);
 
                     surface.flushAndSubmit();
 
