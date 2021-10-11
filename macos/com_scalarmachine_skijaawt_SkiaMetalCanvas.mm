@@ -16,6 +16,8 @@ id <MTLRenderPipelineState> rps;
 id <CAMetalDrawable> currentDrawable;
 id <MTLCommandBuffer> currentCb;
 
+id currentTexture;
+
 bool initialize();
 
 /*
@@ -64,6 +66,10 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRen
     currentCb = [queue commandBuffer];
     CFRetain(currentCb);
     currentCb.label = @"Present";
+
+    currentTexture = currentDrawable.texture
+    CFRetain(currentTexture);
+
     return 0;
   }
 
