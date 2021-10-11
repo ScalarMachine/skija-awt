@@ -17,6 +17,8 @@ public class SkiaMetalCanvas extends Canvas {
 
     protected native long nGetQueuePtr();
 
+    protected native int nResize();
+
     protected native int nBeginRender();
 
     protected native long nGetDrawableTexturePtr();

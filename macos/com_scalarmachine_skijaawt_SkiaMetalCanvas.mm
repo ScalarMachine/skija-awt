@@ -6,6 +6,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <simd/simd.h>
 
+float backWidth;
+float backHeight;
+
 bool inited = false;
 id <MTLDevice> device;
 id <MTLCommandQueue> queue;
@@ -73,6 +76,18 @@ JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetQueu
   (JNIEnv *, jobject) {
     assert(queue);
     return static_cast<jlong>(reinterpret_cast<long>(queue));
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nResize
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nResize
+  (JNIEnv *env, jobject canvas) {
+    JawtHelper helper(env, canvas);
+
+    resize(helper.dsi);
   }
 
 /*
@@ -155,10 +170,10 @@ bool initialize() {
 
   // layer.displaySyncEnabled = YES;
 
-  // layer.layoutManager = [CAConstraintLayoutManager layoutManager];
-  // layer.autoresizingMask = kCALayerHeightSizable | kCALayerWidthSizable;
-  // layer.contentsGravity = kCAGravityTopLeft;
-  // layer.magnificationFilter = kCAFilterNearest;
+  layer.layoutManager = [CAConstraintLayoutManager layoutManager];
+  layer.autoresizingMask = kCALayerHeightSizable | kCALayerWidthSizable;
+  layer.contentsGravity = kCAGravityTopLeft;
+  layer.magnificationFilter = kCAFilterNearest;
   // NSColorSpace *cs = surfaceLayers.windowLayer.colorspace;
   // layer.colorspace = cs.CGColorSpace;
 
@@ -214,4 +229,17 @@ bool initialize() {
   printf("initialized\n");
 
   return true;
+}
+
+void resize(JAWT_DrawingSurfaceInfo const *dsi) {
+  CGFloat backingScaleFactor = 2;
+  CGSize backingSize;
+  backingSize.width = backingScaleFactor * dsi->bounds.width;
+  backingSize.height = backingScaleFactor * dsi->bounds.height;
+
+  layer.drawableSize = backingSize;
+  layer.contentsScale = backingScaleFactor;
+
+  backWidth = backingSize.width;
+  backHeight = backingSize.height;
 }

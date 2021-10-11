@@ -61,6 +61,14 @@ JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetQueu
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nResize
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nResize
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nBeginRender
  * Signature: ()I
  */
