@@ -8,7 +8,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.*;
 
-public class SkiaTest extends Frame {
+public class SkiaTest extends javax.swing.JFrame {
     SkiaMetalCanvas panel;
     
     public SkiaTest() {
