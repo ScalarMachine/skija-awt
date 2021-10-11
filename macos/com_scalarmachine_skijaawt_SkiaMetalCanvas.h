@@ -45,6 +45,22 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitiali
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nGetDevicePtr
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetDevicePtr
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nGetQueuePtr
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetQueuePtr
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nBeginRender
  * Signature: ()I
  */
@@ -53,10 +69,10 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRen
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
- * Method:    nGetMetalTexture
+ * Method:    nGetDrawableTexturePtr
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetMetalTexture
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetDrawableTexturePtr
   (JNIEnv *, jobject);
 
 /*

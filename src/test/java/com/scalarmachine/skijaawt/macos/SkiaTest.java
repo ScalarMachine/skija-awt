@@ -30,23 +30,35 @@ public class SkiaTest {
 
             // canvas.oldTime = System.nanoTime();
 
+            DirectContext directContext = DirectContext.makeMetal(
+                canvas.nGetDevicePtr(), canvas.nGetQueuePtr());
+
             new Thread(() -> {
                 while (true) {
                     if (!canvas.isValid()) return;
                     canvas.nBeginRender();
 
-                    long texture = canvas.nGetMetalTexture();
-
-                    System.out.println(texture);
-
                     BackendRenderTarget renderTarget = BackendRenderTarget.makeMetal(
                         (int) 200,
                         (int) 200,
-                        texture
+                        canvas.nGetDrawableTexturePtr()
                     );
+                    Surface surface = Surface.makeFromBackendRenderTarget(
+                        directContext,
+                        renderTarget,
+                        SurfaceOrigin.TOP_LEFT,
+                        SurfaceColorFormat.BGRA_8888,
+                        ColorSpace.getDisplayP3(),
+                        new SurfaceProps(PixelGeometry.RGB_H));
 
                     // canvas.nRender();
+
+                    surface.flushAndSubmit();
+
                     canvas.nSwapBuffers();
+
+                    surface.close();
+                    renderTarget.close();
                 }
             }).start();
         });
