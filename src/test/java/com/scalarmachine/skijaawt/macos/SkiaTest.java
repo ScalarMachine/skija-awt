@@ -30,12 +30,12 @@ public class SkiaTest {
             frame.setVisible(true);
             frame.transferFocus();
 
+            panel.nResize();
+
             // panel.oldTime = System.nanoTime();
 
             DirectContext directContext = DirectContext.makeMetal(
-                panel.nGetDevicePtr(), panel.nGetQueuePtr());
-
-            panel.nResize();
+                panel.nGetDevicePtr(), panel.nGetQueuePtr());            
 
             new Thread(() -> {
                 var fRotationAngle = 0f;
