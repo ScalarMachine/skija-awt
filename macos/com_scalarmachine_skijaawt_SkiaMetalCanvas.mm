@@ -14,6 +14,7 @@ CAMetalLayer *layer;
 id <MTLRenderPipelineState> rps;
 
 id <CAMetalDrawable> currentDrawable;
+id <MTLCommandBuffer> currentCb;
 
 bool initialize();
 
@@ -60,6 +61,11 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRen
   (JNIEnv *, jobject) {
     currentDrawable = [layer nextDrawable];
     CFRetain(currentDrawable);
+
+    currentCb = [queue commandBuffer];
+    CFRetain(currentCb);
+    currentCb.label = @"Present";
+    return 0;
   }
 
 /*
@@ -80,19 +86,19 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nRender
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nSwapBuffers
   (JNIEnv *, jobject) {
     id <CAMetalDrawable> drawable = currentDrawable;
-    assert drawable;
+    assert(drawable);
 
-    id <MTLCommandBuffer> cb = [queue commandBuffer];
-    cb.label = @"Present";
-
-    metalPaint(drawable, cb);
+    id <MTLCommandBuffer> cb = currentCb;
+    assert(cb);
 
     [cb presentDrawable:drawable];
     [cb commit];
 
     CFRelease(cb);
+    currentCb = nil;
     CFRelease(drawable);
     currentDrawable = nil;
+    return 0;
   }
 
 bool initialize() {
