@@ -27,7 +27,6 @@ public class SkiaTest extends javax.swing.JFrame {
 
         addComponentListener(new ComponentAdapter() {
             @Override public void componentResized(ComponentEvent ev) {
-                System.out.println("componentResized nResize");
                 panel.nResize();
             }
         });
@@ -39,7 +38,6 @@ public class SkiaTest extends javax.swing.JFrame {
             setVisible(true);
             transferFocus();
 
-            System.out.println("first nResize");
             panel.nResize();
 
             // panel.oldTime = System.nanoTime();
