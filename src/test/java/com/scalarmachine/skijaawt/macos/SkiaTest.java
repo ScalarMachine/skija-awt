@@ -10,7 +10,6 @@ import java.awt.event.*;
 
 public class SkiaTest extends Frame {
     SkiaMetalCanvas panel;
-    boolean resized = false;
     
     public SkiaTest() {
         setPreferredSize(new Dimension(400, 300));
@@ -28,7 +27,7 @@ public class SkiaTest extends Frame {
 
         addComponentListener(new ComponentAdapter() {
             @Override public void componentResized(ComponentEvent ev) {
-                resized = true;
+                panel.nResize();
             }
         });
     }
