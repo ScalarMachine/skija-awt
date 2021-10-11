@@ -15,4 +15,8 @@ dependencies {
     implementation "org.jetbrains.skija:${skija_artifact}:${skija_version}"
 }
 
-println configurations.runtime.resolve()
+task runSkiaTest(type: JavaExec) {
+    group = "Execution"
+    classpath = testSets.main.runtimeClasspath
+    main = com.scalarmachine.skijaawt.SkiaTest
+}
