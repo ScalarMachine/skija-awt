@@ -12,6 +12,8 @@ public:
   JAWT_DrawingSurface *ds;
   JAWT_DrawingSurfaceInfo *dsi;
 
+  jint lock;
+
   int error;
 
   JawtHelper(JNIEnv *env, jclass canvas): env(env), canvas(canvas) {
