@@ -71,7 +71,7 @@ public class SkiaTest {
                     Paint paint = new Paint();
                     paint.setStrokeWidth(3f);
                     paint.setColor(0xFFFFFFFF);
-                    canvas.drawLine(10, 10, 100, 100, paint);
+                    canvas.drawLine(-50, -50, 100, 100, paint);
 
                     surface.flushAndSubmit();
 
