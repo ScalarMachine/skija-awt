@@ -67,7 +67,7 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRen
     CFRetain(currentCb);
     currentCb.label = @"Present";
 
-    currentTexture = currentDrawable.texture
+    currentTexture = currentDrawable.texture;
     CFRetain(currentTexture);
 
     return 0;
