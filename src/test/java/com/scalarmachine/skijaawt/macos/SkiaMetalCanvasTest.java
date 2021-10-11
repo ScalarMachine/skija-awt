@@ -3,12 +3,12 @@ package com.scalarmachine.skijaawt;
 import java.awt.*;
 import java.awt.event.*;
 
-// build: javac com/scalarmachine/**/macos/*.java
-// run: java -Djava.library.path=../../../ com.scalarmachine.skijaawt.SkiaMetalCanvasTest
+// build: javac com/scalarmachine/**/macos/*.java -d ../../../out
+// run: java -Djava.library.path=. com.scalarmachine.skijaawt.SkiaMetalCanvasTest
 
 public class SkiaMetalCanvasTest {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        System.out.println(SkiaMetalCanvas.nPing());
 
         Frame frame = new Frame();
         frame.setPreferredSize(new Dimension(400, 300));

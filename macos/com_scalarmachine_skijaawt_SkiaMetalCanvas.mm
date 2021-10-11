@@ -2,6 +2,16 @@
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nPing
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nPing
+  (JNIEnv *, jclass) {
+    return 123;
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nInitialize
  * Signature: ()I
  */
