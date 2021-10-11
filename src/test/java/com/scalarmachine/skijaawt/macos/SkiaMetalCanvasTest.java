@@ -1,5 +1,8 @@
 package com.scalarmachine.skijaawt;
 
+import java.awt.*;
+import java.awt.event.*;
+
 // build: javac com/scalarmachine/**/macos/*.java
 // run: java -Djava.library.path=../../../ com.scalarmachine.skijaawt.SkiaMetalCanvasTest
 
