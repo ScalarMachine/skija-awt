@@ -1,4 +1,5 @@
 #import "com_scalarmachine_skijaawt_SkiaMetalCanvas.h"
+#import "jawt_helper.h"
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
@@ -17,7 +18,7 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nPing
  */
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitialize
   (JNIEnv *, jobject) {
-      return 0;
+    return 0;
   }
 
 /*
@@ -27,5 +28,5 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitiali
  */
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nRender
   (JNIEnv *, jobject) {
-      return 0;
+    return 0;
   }

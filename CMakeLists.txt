@@ -11,7 +11,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
 
 add_library(
-    ${NAME} SHARED macos/com_scalarmachine_skijaawt_SkiaMetalCanvas.mm
+    ${NAME} SHARED
+    macos/com_scalarmachine_skijaawt_SkiaMetalCanvas.mm
+    jawt/jawt_helper.cc
 )
 
 # set_source_files_properties(
