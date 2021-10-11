@@ -20,28 +20,29 @@ public class SkiaTest {
             }
         });
 
-        SkiaMetalCanvas canvas = new SkiaMetalCanvas();
-        frame.add(canvas);
+        SkiaMetalCanvas panel = new SkiaMetalCanvas();
+        frame.add(panel);
 
         EventQueue.invokeLater(() -> {
-            canvas.nInitialize();
+            panel.nInitialize();
             frame.setVisible(true);
             frame.transferFocus();
 
-            // canvas.oldTime = System.nanoTime();
+            // panel.oldTime = System.nanoTime();
 
             DirectContext directContext = DirectContext.makeMetal(
-                canvas.nGetDevicePtr(), canvas.nGetQueuePtr());
+                panel.nGetDevicePtr(), panel.nGetQueuePtr());
 
             new Thread(() -> {
+                var fRotationAngle = 0f;
                 while (true) {
-                    if (!canvas.isValid()) return;
-                    canvas.nBeginRender();
+                    if (!panel.isValid()) return;
+                    panel.nBeginRender();
 
                     BackendRenderTarget renderTarget = BackendRenderTarget.makeMetal(
                         (int) 200,
                         (int) 200,
-                        canvas.nGetDrawableTexturePtr()
+                        panel.nGetDrawableTexturePtr()
                     );
                     Surface surface = Surface.makeFromBackendRenderTarget(
                         directContext,
@@ -51,11 +52,26 @@ public class SkiaTest {
                         ColorSpace.getDisplayP3(),
                         new SurfaceProps(PixelGeometry.RGB_H));
 
-                    // canvas.nRender();
+                    // panel.nRender();
+
+                    var canvas = surface.getCanvas();
+                    canvas.clear(0xFFFFFFFF);
+
+                    fRotationAngle += 0.2f;
+                    if (fRotationAngle > 360.0f) {
+                        fRotationAngle -= 360.0f;
+                    }
+                    canvas.translate(256, 256);
+                    canvas.rotate(fRotationAngle);
+
+                    Paint paint = new Paint();
+                    paint.setStrokeWidth(3f);
+                    paint.setColor(0x00FFFFFF);
+                    canvas.drawLine(100, 100, 200, 200, paint);
 
                     surface.flushAndSubmit();
 
-                    canvas.nSwapBuffers();
+                    panel.nSwapBuffers();
 
                     surface.close();
                     renderTarget.close();
