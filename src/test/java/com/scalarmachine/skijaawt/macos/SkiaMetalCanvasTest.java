@@ -28,7 +28,7 @@ public class SkiaMetalCanvasTest {
             frame.setVisible(true);
             frame.transferFocus();
 
-            canvas.oldTime = System.nanoTime();
+            // canvas.oldTime = System.nanoTime();
 
             new Thread(() -> {
                 while (true) {
