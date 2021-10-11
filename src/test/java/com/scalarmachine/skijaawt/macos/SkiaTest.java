@@ -40,8 +40,6 @@ public class SkiaTest extends javax.swing.JFrame {
 
             panel.nResize();
 
-            // panel.oldTime = System.nanoTime();
-
             DirectContext directContext = DirectContext.makeMetal(
                 panel.nGetDevicePtr(), panel.nGetQueuePtr());            
 
