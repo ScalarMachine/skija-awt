@@ -8,27 +8,36 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.*;
 
-public class SkiaTest {
-    public static void main(String[] args) {
-        System.out.println(SkiaMetalCanvas.nPing());
+public class SkiaTest extends Frame {
+    SkiaMetalCanvas panel;
+    boolean resized = false;
+    
+    public SkiaTest() {
+        setPreferredSize(new Dimension(400, 300));
+        pack();
+        setLocationRelativeTo(null);
 
-        Frame frame = new Frame();
-        frame.setPreferredSize(new Dimension(400, 300));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.addWindowListener(new WindowAdapter() {
+        panel = new SkiaMetalCanvas();
+        add(panel);
+
+        addWindowListener(new WindowAdapter() {
             @Override public void windowClosing(WindowEvent ev) {
                 System.exit(0);
             }
         });
 
-        SkiaMetalCanvas panel = new SkiaMetalCanvas();
-        frame.add(panel);
+        addComponentListener(new ComponentAdapter() {
+            @Override public void componentResized(ComponentEvent ev) {
+                resized = true;
+            }
+        });
+    }
 
+    public void myShow() {
         EventQueue.invokeLater(() -> {
             panel.nInitialize();
-            frame.setVisible(true);
-            frame.transferFocus();
+            setVisible(true);
+            transferFocus();
 
             panel.nResize();
 
@@ -86,5 +95,12 @@ public class SkiaTest {
                 }
             }).start();
         });
+    }
+
+    public static void main(String[] args) {
+        System.out.println(SkiaMetalCanvas.nPing());
+
+        SkiaTest frame = new SkiaTest();
+        frame.myShow();
     }
 }
