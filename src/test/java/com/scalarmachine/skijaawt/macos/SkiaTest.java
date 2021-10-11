@@ -59,7 +59,7 @@ public class SkiaTest {
                     // panel.nRender();
 
                     var canvas = surface.getCanvas();
-                    canvas.clear(0xFFFFFFFF);
+                    canvas.clear(0);
 
                     fRotationAngle += 0.2f;
                     if (fRotationAngle > 360.0f) {
@@ -70,7 +70,7 @@ public class SkiaTest {
 
                     Paint paint = new Paint();
                     paint.setStrokeWidth(3f);
-                    paint.setColor(0x00FFFFFF);
+                    paint.setColor(0xFFFFFFFF);
                     canvas.drawLine(100, 100, 200, 200, paint);
 
                     surface.flushAndSubmit();
