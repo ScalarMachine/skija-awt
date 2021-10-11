@@ -13,5 +13,9 @@ public class SkiaMetalCanvas extends Canvas {
 
     protected native int nInitialize();
 
+    protected native int nBeginRender();
+
     protected native int nRender();
+
+    protected native int nSwapBuffers();
 }

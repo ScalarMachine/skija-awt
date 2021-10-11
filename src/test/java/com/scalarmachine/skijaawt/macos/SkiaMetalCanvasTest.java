@@ -33,7 +33,9 @@ public class SkiaMetalCanvasTest {
             new Thread(() -> {
                 while (true) {
                     if (!canvas.isValid()) return;
+                    canvas.nBeginRender();
                     canvas.nRender();
+                    canvas.nSwapBuffers();
                 }
             }).start();
         });

@@ -13,6 +13,8 @@ CAMetalLayer *layer;
 
 id <MTLRenderPipelineState> rps;
 
+id <CAMetalDrawable> currentDrawable;
+
 bool initialize();
 
 /*
@@ -51,12 +53,46 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitiali
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nBeginRender
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRender
+  (JNIEnv *, jobject) {
+    currentDrawable = [layer nextDrawable];
+    CFRetain(currentDrawable);
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nRender
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nRender
   (JNIEnv *, jobject) {
     return 0;
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nSwapBuffers
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nSwapBuffers
+  (JNIEnv *, jobject) {
+    id <CAMetalDrawable> drawable = currentDrawable;
+    assert drawable;
+
+    id <MTLCommandBuffer> cb = [queue commandBuffer];
+    cb.label = @"Present";
+
+    metalPaint(drawable, cb);
+
+    [cb presentDrawable:drawable];
+    [cb commit];
+
+    CFRelease(cb);
+    CFRelease(drawable);
+    currentDrawable = nil;
   }
 
 bool initialize() {

@@ -45,10 +45,26 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitiali
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nBeginRender
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRender
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nRender
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nRender
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nSwapBuffers
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nSwapBuffers
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
