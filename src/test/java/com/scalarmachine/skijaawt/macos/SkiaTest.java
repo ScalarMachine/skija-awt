@@ -4,6 +4,8 @@ import org.jetbrains.skija.*;
 import org.jetbrains.skija.impl.*;
 
 import java.awt.Frame;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.event.*;
 
 public class SkiaTest {
