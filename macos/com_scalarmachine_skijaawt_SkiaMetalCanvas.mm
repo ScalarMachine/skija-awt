@@ -75,6 +75,17 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRen
 
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Method:    nGetMetalTexture
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetMetalTexture
+  (JNIEnv *, jobject) {
+    assert(currentTexture);
+    return static_cast<jlong>(reinterpret_cast<long>(currentTexture));
+  }
+
+/*
+ * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nRender
  * Signature: ()I
  */
@@ -101,6 +112,8 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nSwapBuff
 
     CFRelease(cb);
     currentCb = nil;
+    CFRelease(currentTexture);
+    currentTexture = nil;
     CFRelease(drawable);
     currentDrawable = nil;
     return 0;
