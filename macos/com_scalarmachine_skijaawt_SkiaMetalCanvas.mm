@@ -23,6 +23,8 @@ id currentTexture;
 
 bool initialize();
 
+void resize(JAWT_DrawingSurfaceInfo const *dsi);
+
 /*
  * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
  * Method:    nPing
