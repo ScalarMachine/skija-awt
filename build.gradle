@@ -17,6 +17,6 @@ dependencies {
 
 task runSkiaTest(type: JavaExec) {
     group = "Execution"
-    classpath = testSets.main.runtimeClasspath
+    classpath = sourceSets.test.runtimeClasspath
     main = com.scalarmachine.skijaawt.SkiaTest
 }
