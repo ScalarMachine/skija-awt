@@ -90,6 +90,8 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nResize
     JawtHelper helper(env, canvas);
 
     resize(helper.dsi);
+
+    return 0;
   }
 
 /*
