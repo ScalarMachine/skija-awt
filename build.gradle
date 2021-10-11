@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'com.scalarmachine'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://packages.jetbrains.team/maven/p/skija/maven" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    implementation "org.jetbrains.skija:${skija_artifact}:${skija_version}"
+}
