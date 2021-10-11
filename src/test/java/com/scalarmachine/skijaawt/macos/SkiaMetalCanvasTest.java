@@ -3,7 +3,7 @@ package com.scalarmachine.skijaawt;
 import java.awt.*;
 import java.awt.event.*;
 
-// build: javac com/scalarmachine/**/macos/*.java -d ../../../out
+// build: javac -cp ../../../out com/scalarmachine/**/macos/*.java -d ../../../out
 // run: java -Djava.library.path=. com.scalarmachine.skijaawt.SkiaMetalCanvasTest
 
 public class SkiaMetalCanvasTest {
