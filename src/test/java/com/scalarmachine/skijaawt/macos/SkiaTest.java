@@ -12,6 +12,7 @@ public class SkiaTest extends javax.swing.JFrame {
     SkiaMetalCanvas panel;
     
     public SkiaTest() {
+        setIgnoreRepaint(true);
         setPreferredSize(new Dimension(400, 300));
         pack();
         setLocationRelativeTo(null);
