@@ -59,11 +59,8 @@ JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitiali
  */
 JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRender
   (JNIEnv *, jobject) {
-    currentDrawable = [layer nextDrawable];
-    CFRetain(currentDrawable);
-
-    currentCb = [queue commandBuffer];
-    CFRetain(currentCb);
+    currentDrawable = CFRetain([layer nextDrawable]);
+    currentCb = CFRetain([queue commandBuffer]);
     currentCb.label = @"Present";
     return 0;
   }
