@@ -65,7 +65,7 @@ public class SkiaTest {
                     if (fRotationAngle > 360.0f) {
                         fRotationAngle -= 360.0f;
                     }
-                    // canvas.translate(256, 256);
+                    canvas.translate(256, 256);
                     canvas.rotate(fRotationAngle);
 
                     Paint paint = new Paint();
