@@ -16,6 +16,8 @@ add_library(
     jawt/jawt_helper.cc
 )
 
+target_include_directories(${NAME} PRIVATE ${PROJECT_SOURCE_DIR})
+
 # set_source_files_properties(
 #         PROPERTIES
 #         MACOSX_PACKAGE_LOCATION
