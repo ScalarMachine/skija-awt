@@ -261,9 +261,15 @@ void resize(JAWT_DrawingSurfaceInfo const *dsi) {
   backingSize.width = backingScaleFactor * dsi->bounds.width;
   backingSize.height = backingScaleFactor * dsi->bounds.height;
 
-  layer.drawableSize = backingSize;
-  layer.contentsScale = backingScaleFactor;
+  if (backWidth != backingSize.width || backHeight != backingSize.height) {
+    [CATransaction begin];
 
-  backWidth = backingSize.width;
-  backHeight = backingSize.height;
+    layer.drawableSize = backingSize;
+    layer.contentsScale = backingScaleFactor;
+
+    [CATransaction commit];
+
+    backWidth = backingSize.width;
+    backHeight = backingSize.height;
+  }
 }
