@@ -35,6 +35,8 @@ public class SkiaTest {
             DirectContext directContext = DirectContext.makeMetal(
                 panel.nGetDevicePtr(), panel.nGetQueuePtr());
 
+            panel.nResize();
+
             new Thread(() -> {
                 var fRotationAngle = 0f;
                 while (true) {
