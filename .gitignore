@@ -13,3 +13,8 @@ _deps
 *.class
 .gradle
 /build
+*.dylib
+/gradle
+/gradlew
+/gradlew.bat
+/cmake-build-debug

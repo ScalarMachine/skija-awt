@@ -1,4 +1,4 @@
-package com.scalarmachine.skijaawt;
+package com.scalarmachine.skijaawt.macos;
 
 import org.jetbrains.skija.*;
 import org.jetbrains.skija.impl.*;
@@ -6,19 +6,22 @@ import org.jetbrains.skija.impl.*;
 import java.awt.Frame;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
-public class SkiaTest extends javax.swing.JFrame {
+public class SkiaTest extends Frame {
     SkiaMetalCanvas panel;
     
     public SkiaTest() {
         setIgnoreRepaint(true);
-        setPreferredSize(new Dimension(400, 300));
-        pack();
-        setLocationRelativeTo(null);
 
         panel = new SkiaMetalCanvas();
         add(panel);
+
+        setPreferredSize(new Dimension(400, 300));
+        pack();
+        setLocationRelativeTo(null);
 
         addWindowListener(new WindowAdapter() {
             @Override public void windowClosing(WindowEvent ev) {
@@ -31,6 +34,16 @@ public class SkiaTest extends javax.swing.JFrame {
                 panel.nResize();
             }
         });
+    }
+
+    @Override
+    public Graphics getGraphics() {
+        return new NoOpGraphics2D(super.getGraphics());
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        // System.out.println("Paint on Frame ignored");
     }
 
     public void myShow() {

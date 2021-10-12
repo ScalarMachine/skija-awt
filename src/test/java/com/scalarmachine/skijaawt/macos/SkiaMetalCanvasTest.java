@@ -1,4 +1,4 @@
-package com.scalarmachine.skijaawt;
+package com.scalarmachine.skijaawt.macos;
 
 import java.awt.*;
 import java.awt.event.*;

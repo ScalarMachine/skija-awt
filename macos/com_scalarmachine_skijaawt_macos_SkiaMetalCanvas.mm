@@ -1,4 +1,4 @@
-#import "com_scalarmachine_skijaawt_SkiaMetalCanvas.h"
+#import "com_scalarmachine_skijaawt_macos_SkiaMetalCanvas.h"
 #import "jawt/jawt_helper.h"
 
 #import <Metal/Metal.h>
@@ -26,158 +26,162 @@ bool initialize();
 void resize(JAWT_DrawingSurfaceInfo const *dsi);
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nPing
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nPing
-  (JNIEnv *, jclass) {
-    return 123;
-  }
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nPing
+    (JNIEnv *, jclass) {
+  return 123;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nInitialize
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nInitialize
-  (JNIEnv *env, jobject canvas) {
-    JawtHelper helper(env, canvas);
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nInitialize
+    (JNIEnv *env, jobject canvas) {
+  JawtHelper helper(env, canvas);
 
-    [CATransaction begin];
+  [CATransaction begin];
 
-    if (!initialize()) {
-      [CATransaction commit];
-      return -1;
-    }
-
-    id <JAWT_SurfaceLayers> surfaceLayers = (id) helper.dsi->platformInfo;
-    surfaceLayers.layer = layer;
-
+  if (!initialize()) {
     [CATransaction commit];
-
-    return 0;
+    return -1;
   }
+
+  id <JAWT_SurfaceLayers> surfaceLayers = (id) helper.dsi->platformInfo;
+  surfaceLayers.layer = layer;
+
+  [CATransaction commit];
+
+  return 0;
+}
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nGetDevicePtr
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetDevicePtr
-  (JNIEnv *, jobject) {
-    assert(device);
-    return static_cast<jlong>(reinterpret_cast<long>(device));
-  }
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nGetDevicePtr
+    (JNIEnv *, jobject) {
+  assert(device);
+  return static_cast<jlong>(reinterpret_cast<long>(device));
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nGetQueuePtr
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetQueuePtr
-  (JNIEnv *, jobject) {
-    assert(queue);
-    return static_cast<jlong>(reinterpret_cast<long>(queue));
-  }
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nGetQueuePtr
+    (JNIEnv *, jobject) {
+  assert(queue);
+  return static_cast<jlong>(reinterpret_cast<long>(queue));
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nResize
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nResize
-  (JNIEnv *env, jobject canvas) {
-    JawtHelper helper(env, canvas);
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nResize
+    (JNIEnv *env, jobject canvas) {
+  JawtHelper helper(env, canvas);
 
-    resize(helper.dsi);
+  resize(helper.dsi);
 
-    return 0;
-  }
+  return 0;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nGetBackWidth
  * Signature: ()F
  */
-JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetBackWidth
-  (JNIEnv *, jobject) {
-    return backWidth;
-  }
+JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nGetBackWidth
+    (JNIEnv *, jobject) {
+  return backWidth;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nGetBackHeight
  * Signature: ()F
  */
-JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetBackHeight
-  (JNIEnv *, jobject) {
-    return backHeight;
-  }
+JNIEXPORT jfloat JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nGetBackHeight
+    (JNIEnv *, jobject) {
+  return backHeight;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nBeginRender
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nBeginRender
-  (JNIEnv *, jobject) {
-    currentDrawable = [layer nextDrawable];
-    CFRetain(currentDrawable);
-    currentCb = [queue commandBuffer];
-    CFRetain(currentCb);
-    currentCb.label = @"Present";
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nBeginRender
+    (JNIEnv *, jobject) {
 
-    currentTexture = currentDrawable.texture;
-    CFRetain(currentTexture);
+  currentDrawable = [layer nextDrawable];
+  CFRetain(currentDrawable);
+  currentCb = [queue commandBuffer];
+  CFRetain(currentCb);
+  currentCb.label = @"Present";
 
-    return 0;
-  }
+  currentTexture = currentDrawable.texture;
+  CFRetain(currentTexture);
+
+
+  return 0;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nGetMetalTexture
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nGetDrawableTexturePtr
-  (JNIEnv *, jobject) {
-    assert(currentTexture);
-    return static_cast<jlong>(reinterpret_cast<long>(currentTexture));
-  }
+JNIEXPORT jlong JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nGetDrawableTexturePtr
+    (JNIEnv *, jobject) {
+  assert(currentTexture);
+  return static_cast<jlong>(reinterpret_cast<long>(currentTexture));
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nRender
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nRender
-  (JNIEnv *, jobject) {
-    return 0;
-  }
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nRender
+    (JNIEnv *, jobject) {
+  return 0;
+}
 
 /*
- * Class:     com_scalarmachine_skijaawt_SkiaMetalCanvas
+ * Class:     com_scalarmachine_skijaawt_macos_SkiaMetalCanvas
  * Method:    nSwapBuffers
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_SkiaMetalCanvas_nSwapBuffers
-  (JNIEnv *, jobject) {
-    id <CAMetalDrawable> drawable = currentDrawable;
-    assert(drawable);
+JNIEXPORT jint JNICALL Java_com_scalarmachine_skijaawt_macos_SkiaMetalCanvas_nSwapBuffers
+    (JNIEnv *, jobject) {
+  id <CAMetalDrawable> drawable = currentDrawable;
+  assert(drawable);
 
-    id <MTLCommandBuffer> cb = currentCb;
-    assert(cb);
+  id <MTLCommandBuffer> cb = currentCb;
+  assert(cb);
 
-    [cb presentDrawable:drawable];
-    [cb commit];
+  [cb presentDrawable:drawable];
+  [cb commit];
+  // [cb waitUntilScheduled];
+  // [drawable present];
 
-    CFRelease(cb);
-    currentCb = nil;
-    CFRelease(currentTexture);
-    currentTexture = nil;
-    CFRelease(drawable);
-    currentDrawable = nil;
-    return 0;
-  }
+  CFRelease(cb);
+  currentCb = nil;
+  CFRelease(currentTexture);
+  currentTexture = nil;
+  CFRelease(drawable);
+  currentDrawable = nil;
+  return 0;
+}
 
 bool initialize() {
   if (inited) return true;
@@ -200,6 +204,11 @@ bool initialize() {
   layer.magnificationFilter = kCAFilterNearest;
   // NSColorSpace *cs = surfaceLayers.windowLayer.colorspace;
   // layer.colorspace = cs.CGColorSpace;
+
+
+  // layer.needsDisplayOnBoundsChange = YES;
+  // layer.presentsWithTransaction = YES;
+
 
   // CGRect frame = CGRectMake(0, 0, backingSize.width, backingSize.height);
   // NSView *view = [[NSView alloc] initWithFrame:frame];
@@ -257,6 +266,19 @@ bool initialize() {
 
 void resize(JAWT_DrawingSurfaceInfo const *dsi) {
   CGFloat backingScaleFactor = 2;
+
+  // id <JAWT_SurfaceLayers> surfaceLayers = (id) dsi->platformInfo;
+  // CALayer *windowLayer = surfaceLayers.windowLayer;
+  // if (windowLayer) {
+  //   auto view = (NSView *) windowLayer.delegate;
+  //   if (view) {
+  //     NSWindow *window = view.window;
+  //     if (window) {
+  //       backingScaleFactor = window.backingScaleFactor;
+  //       printf("backingScaleFactor=%g\n", backingScaleFactor);
+  //     }
+  //   }
+  // }
   CGSize backingSize;
   backingSize.width = backingScaleFactor * dsi->bounds.width;
   backingSize.height = backingScaleFactor * dsi->bounds.height;
@@ -269,7 +291,7 @@ void resize(JAWT_DrawingSurfaceInfo const *dsi) {
 
     [CATransaction commit];
 
-    backWidth = backingSize.width;
-    backHeight = backingSize.height;
+    backWidth = (float) backingSize.width;
+    backHeight = (float) backingSize.height;
   }
 }

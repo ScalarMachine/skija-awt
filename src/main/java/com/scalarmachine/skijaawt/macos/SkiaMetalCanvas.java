@@ -1,4 +1,4 @@
-package com.scalarmachine.skijaawt;
+package com.scalarmachine.skijaawt.macos;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -30,4 +30,14 @@ public class SkiaMetalCanvas extends Canvas {
     protected native int nRender();
 
     protected native int nSwapBuffers();
+
+    @Override
+    public Graphics getGraphics() {
+        return new NoOpGraphics2D(super.getGraphics());
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        // System.out.println("Paint on SkiaMetalCanvas ignored");
+    }
 }
