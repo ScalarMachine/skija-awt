@@ -1,36 +1,40 @@
 package com.scalarmachine.skijaawt.macos;
 
 import org.jetbrains.skija.*;
-import org.jetbrains.skija.impl.*;
 
-import java.awt.Frame;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class SkiaTest extends Frame {
+public final class SkiaTest extends Frame {
     SkiaMetalCanvas panel;
-    
+
     public SkiaTest() {
         setIgnoreRepaint(true);
-
-        panel = new SkiaMetalCanvas();
-        add(panel);
 
         setPreferredSize(new Dimension(400, 300));
         pack();
         setLocationRelativeTo(null);
 
+        panel = new SkiaMetalCanvas();
+        panel.setIgnoreRepaint(true);
+        add(panel);
+
         addWindowListener(new WindowAdapter() {
-            @Override public void windowClosing(WindowEvent ev) {
+            @Override
+            public void windowClosing(WindowEvent ev) {
                 System.exit(0);
             }
         });
 
         addComponentListener(new ComponentAdapter() {
-            @Override public void componentResized(ComponentEvent ev) {
+            @Override
+            public void componentResized(ComponentEvent ev) {
                 panel.nResize();
             }
         });
@@ -49,13 +53,14 @@ public class SkiaTest extends Frame {
     public void myShow() {
         EventQueue.invokeLater(() -> {
             panel.nInitialize();
+
             setVisible(true);
             transferFocus();
 
             panel.nResize();
 
             DirectContext directContext = DirectContext.makeMetal(
-                panel.nGetDevicePtr(), panel.nGetQueuePtr());            
+                    panel.nGetDevicePtr(), panel.nGetQueuePtr());
 
             new Thread(() -> {
                 var fRotationAngle = 0f;
@@ -64,17 +69,17 @@ public class SkiaTest extends Frame {
                     panel.nBeginRender();
 
                     BackendRenderTarget renderTarget = BackendRenderTarget.makeMetal(
-                        (int) panel.nGetBackWidth(),
-                        (int) panel.nGetBackHeight(),
-                        panel.nGetDrawableTexturePtr()
+                            (int) panel.nGetBackWidth(),
+                            (int) panel.nGetBackHeight(),
+                            panel.nGetDrawableTexturePtr()
                     );
                     Surface surface = Surface.makeFromBackendRenderTarget(
-                        directContext,
-                        renderTarget,
-                        SurfaceOrigin.TOP_LEFT,
-                        SurfaceColorFormat.BGRA_8888,
-                        ColorSpace.getDisplayP3(),
-                        new SurfaceProps(PixelGeometry.RGB_H));
+                            directContext,
+                            renderTarget,
+                            SurfaceOrigin.TOP_LEFT,
+                            SurfaceColorFormat.BGRA_8888,
+                            ColorSpace.getDisplayP3(),
+                            new SurfaceProps(PixelGeometry.RGB_H));
 
                     // panel.nRender();
 
