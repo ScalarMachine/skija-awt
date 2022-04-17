@@ -1,2 +1,2 @@
 # skija-awt
-Use awt with skija (skia java binding from JetBrains)
+Use AWT with [Skija](https://github.com/HumbleUI/Skija) (Skia java binding)
